@@ -1,0 +1,145 @@
+			### 11 서버 프로그램 ###
+eclipse--> web developer 다운로드 (Package로 다운)
+
+
+		# HTTP Request #
+
+Request Line(요청라인) : 요청방식(GET, POST), 자원의 위치(URL), 프로토콜의 버젼 (HTTP/1.1)
+
+Request Header(요청 헤더) : 웹 브라우져 정보, 언어, 인코딩 방식, 요청 서버 정보 등과 같은 추가 정보를 가짐.
+
+Request Body(요청 본체) : 요청에 필요한 내용을 갖는다.
+
+		# HTTP Response #
+
+Status Line(상태 라인)
+
+Response Header(응답 헤더)
+
+Response Body(응답 본체)
+
+
+		# JSP 외의 ServerSideScript(SSS) 종류 #
+
+1. ASP
+2. PHP
+3. Servlet / JSP
+
+@ JSP 란
+자바라는 언어가 처음 나왔을 때는 인기를 얻지 못했음.
+but 자바로 웹을 구현해보자 해서 나온게 Servlet임.
+Servlet은 java파일 안에 HTML파일이 포함되어 있었음.
+
+JSP는 HTML을 기본으로 해서 Java문법(파일)들을 포함시킨거임, 즉 Servlet이랑 반대임. 조금 더 편하다.
+
+==> HTML 안에 JSP Script 코드가 있고 java파일로 변환되어서 사용됨.
+
+
+
+Dynamic Project하나 만들고(JSP 프로젝트 명 ) File-Other-server-apache-tomcat v9.0- next - browse - c:\program files\apache software foundation\tomcat 9,0 - finish
+
+overview(그 terminal 있는 하단창에)-server- port number 8081
+modules- tomcat v9.0 server at localhost 우클릭 - add and remove 프로젝트 명 옆으로 옮겨주고 finish
+
+위에 뜨는거 클릭-edit-path를 / (최상위 경로)로 바꿔주고 체크해제 okay  ctrl + s로 저장하기.
+
+JSP 프로젝트 우클릭 - properties - java build path - libraries - classpath클릭 -add library - server runtimes - apache tomcat finish - apply
+
+project facets - java 버젼 맞춰주고 오른쪽 창에 runtimes 들어가서 체크 apply
+
+server - tomcat v9.0 클릭 apply
+
+window - preference - General - workspace - text file encoding : other : UTF-8로 되어있는지 확인.
+
+검색에다가 files -css files, HTML files, JSP Files 전부 encoding UTF-8로 맞춰주기
+
+
+경로가
+http://localhost:8080/JSP 이렇게 되어있는걸 /로 바꿔서
+http://localhost:8080/ 이렇게 됐음.
+webapp에다가 우클릭 - JSP File 하나 만들기
+
+http://download.emmet.io/eclipse/updates/ 
+==> 이클립스 에밋 설치 검색해서 경로 복사
+help - available software - 경로 붙여넣고 add 해서 emmet 하고 뜨는거 체크 finish
+
+다운이 진행되다보면 뭐 뜨는데 체크박스 다 체크하고 trust하고 restart now 뜨면 정상적으로 깔리고 있는거임.
+
+인터넷이 안되기 때문에 외부평가에서는 플러그인을 받을 수 없음
+지금은 그냥 빠르게 구현하려고 하는거
+window - preferences- emmet 검색해서 jsp, 을 추가하고 apply and close
+
+그리고 Newfile.jsp에 돌아와서 .container>ul.menu>li*4>a 적고 tab이나 ctrl + e 누르면 emmet 자동으로 사용됨.
+
+@ Jsp가 어떻게 java를 실행하는지 확인하는 법은
+
+ JSP 클릭해서 properties - resource - 경로 옆에 버튼 클릭해서 들어가보기 .metadata 들어가서 plugins - server.core가 붙어있는 폴더를 찾기! - tmp0 - work -Catalina -localhost - ROOT - org - apache - jsp
+
+NewFile_jsp.java 를 메모장으로 열게되면, Servlet 코드를 볼 수 있음.
+
+
+@ 클라우드 서버프로그램 구현 제 1장에 build나 META-INF 이런거에 대한 설명있으니깐 읽어보기
+
+
+			# JSP 기초 문법 #
+여기서부터 중요함.
+
+JSP ------> java (Servlet으로 구성되어있음)
+	   속성
+	   기능(Service)
+
+
+@ JSP 스크립트 요소
+1. 선언문(Declaration)  : Servlet의 속성(멤버 변수)부분과 기능(멤버 함수)를 만들 때 사용
+
+2. 스크립트릿(Scriptlet) : 멤버 함수 안에 service라고 하는 이름의 함수 내의 java code를 삽입하는 것
+
+3. 표현식(Expression)
+4. 주석(Comment)
+
+			# 01 - 01선언문 #
+선언문 변수 hello와 함수 testFunc()을 선언하고 실행하고 그 아까 확인할 수 있는 경로 들어가서 메모장 열어서보면 자바로 정의해둔걸 확인할 수 있음.
+
+++ ctrl + shift + / : 주석
+++ ctrl + shift + \ : 주석 해제
+
+<%=hello %> 이런식으로 써야함.
+<% = %> 이런식으로 띄우거나 하면 안됨.
+
+	`		# 01 - 02선언문 #
+실행하고 새로고침할 때 마다(페이지 요청이 들어갈 때마다) a값이 1씩 증가함, server가 실행되고 있는 동안에 계속 값이 유지
+만약에 tomcat server를 우클릭해서 restart를 하면 초기화됨.
+
+			# 01 - 03스크립틀릿 #
+service라는 함수는 페이지 요청, 새로고침할 때마다 동작하는 함수를 말함.
+
+service 함수에는 페이지 요청, 새로고침 할 때 기본으로 들어가있는 코드들이 있음.
+
+++ alt + ctrl + 방향키 하면 그 줄 복사됨.
+
+
+			# 01 - 04스크립틀릿 #
+<% %> 태그를 반복문 사이사이에 넣어서 HTML코드를 중간에 삽입할 수 있음.
+
+이게 불편해서 EL, JS TL 이라는 개선된 코드가 있는데 외부평가에서는 못쓰기 때문에 여기에 조금 더 익숙해져있어야함.
+
+			# 01 - 05스크립틀릿 #
+out이라는 내장 객체를 사용해서 html 코드를 넣을 수 있다.
+자바로 처리하는것임.
+
+스크립틀릿은 service 함수 내에 (절차지향) 코드를 삽입하는 것이기 때문에 반복문/분기문이 가능한 것임.
+
+			# 01 - 06PRAC # 
+문제 풀어보기
+
+			# 02 - 01RequestGet.html #
+input의 name이 변수명(파라미터)이 될꺼임.
+method="get" 방식으로 하게 되면 url에 파라미터 값들이 전달되는 형태를 띄게 됨.
+
+			# 02 - 01result.jsp #
+server의 HttpRequest request객체에서 parameter값들을 받아옴.
+
+
+
+
+
