@@ -1,0 +1,54 @@
+자바빈즈(Java Beans)
+빈 == 객체
+
+
+저장범위
+PageScope : 현재 페이지 내에서만 사용가능
+RequestScope
+Session
+application
+
+			# 05 - 03UseBean #
+setProperty는 SimpleDto의 setter() 메소드를 사용해서 사용하는 것, 그러므로 setter()함수가 필요함.
+
+			# 05 - 04BeanScope #
+pagescope는 해당 페이지에서만 Bean을 사용할 수 있음. ==> bean객체가 따로따로 관리가 된다는거임. 01Start, 02, 03 전부
+
+
+requestscope는 forwarding 중에 데이터값을 쌓아두는 형태
+redirect방식으로 넘기게 되면, 기존의 request는 싹 다 비워지게 됨. session은 request보다 더 상위의 개념임
+==> 지속적인 데이터 저장이 필요하면 session을 쓰면 됨.
+
+왜 session을 쓰게 되었을까?
+==> 처음 웹 클라이언트가 나왔을 때, 클라이언트가 서버에 웹 페이지에 대한 요청을 하게 되면 resource를 제공하게 됨. 근데 접속하는 클라이언트 수를 알 수가 없음. 한 클라이언트가 서버에 접속을 해서 무언가를 할 때 계속 연결이 되어있으면 클라이언트 수가 증가할 때마다 성능저하가 일어나게 됨. 그래서 HTTP Request를 받아서 HTTP response를 보내주게 되면 연결을 끊었음.(Connect Less) 근데 지속적인 연결(쇼핑몰에서 로그인 후에 결제하거나 이런것)이 필요하게 되었고 계속 연결하고 끊고를 반복하게 되면 비효율적이니깐 Session이라는 저장소를 따로 만들어서 지속적인 연결을 요하는 작업을 처리하게 됨. but session에 들어가는 내용을 최소화하는게 맞다. connectless를 보완해주는게 session이라고 생각하면 됨.
+
+@ 외부평가 디비연결
+ C - oraclexe - app - oracle - product - 11.2.0 - server - jdbc - lib
+
+-WEB-INF 만들기
+java project 우클릭 - java EE ~ - Generate ~
+-WEB-INF에 lib폴더 없으면 만들기
+-위 디비 경로에서 ojdbc6.jar 끌어서 lib안에 넣기
+
+cmd - sqlplus system/1234 - 
+create table tbl_board(
+ no int primary key,
+ title varchar(45) not null,
+ writer varchar(45) not null,
+ content varchar(255) );
+
+-Data Source Explorer - Database Connections 우클릭- new - Other Driver oracle 11 눌러보고 안되면 JAR List WEB-INF안에 ojdbc6.jar그거 클릭해주고 Properties 들어가서 
+Connection URL : jdbc:oracle:thin:@localhost:1521:xe
+Database Name : xe
+Driver Class : oracle.jdbc.driver.OracleDriver
+password
+userid 
+치고 okay
+Test Connection 눌렀을때 Ping Successed 뜨면 finish
+
+
+
+
+@@@@@@@@@@@@@@@@@@@@@ INSERT 말고 UPDATE나 아니면 DELETE 이런것도 혼자 만들어보기 @@@@@@@@@@@@@@@@@@@@@@@@
+
+

@@ -1,0 +1,94 @@
+			# 02 - 04JspToJs.jsp #
+
+JSP 값을 JS로 넘기는데는 표현식(<%=msg1%>)을 쓰면된다.
+
+
+			### 클라우드 서버 프로그램 구현 - 3장 ###
+
+@ JSP 지시자란
+<%@ ==> 여기서 @ 역할
+JSP코드를 처리할 때 필요한 정보들을 JSP 컨테이너에게 알리는 역할
+
+import와 errorPage, isErrorPage, pageEncoding
+이정도만 알아도 됨.(에러페이지 작업, import 작업)
+
+프로젝트 안에 Java Resources에 src/main/java에 CH03 만듦.
+
+			# 03 - 02Error, 02Index, 02Main #
+
+500번 ERROR == > 서버 오류
+에러 페이지는 Main에서 errorPage="02Error.jsp"를 추가해줘야 에러가 떴을 때 02Error.jsp를 띄워줌
+
+02Error.jsp에서는 isErrorPage="true"를 추가해줘야함.
+
+@include jsp란
+여러 jsp 페이지에서 특정 파일의 내용을 삽입하고자 할 때 사용
+보통 jsp 여러 페이지에서 공통적으로 포함하는 내용이 있을때 활용
+
+			# 03 - 02include #
+http://github.com/jungwoogyun/FrontEnd.github.io.git
+
+			# #
+@ 방식== > 중요함.
+1. Forward : request내장객체의 내용을 유지한 채로 다른 페이지로 요청
+
+2. 직접과 간접의 차이짐.
+Redirect : request내장객체의 내용을 삭제하고 다른 페이지로 요청
+
+@ ??? getParameter()와 getAttrbute() 차이?
+
+@ Forward와 Redirect의 차이
+1. request를 공유하냐 안하냐
+2. 내용이 남아있냐 없냐
+
+include지시자 할 때 지시자를 하나밖에 인식못하는 오류가 발생하였는데 알아보니 톰캣이 문제였다.
+
+
+			# 05 - 01ForwardAction #
+
+			# 액션 태그의 종류 #
+userBean, setProperty 꼭 알아두면 편함
+
+include지시자, include 액션 태그
+코드를 가지고 오냐, 프로세스 처리 결과를 가지고 오냐의 차이
+
+forwardAction 태그를 쓸 때 내용(content)부분이 없으면 <jsp:param> 중 >앞에 / 처리를 해줘야함.
+
+
+++ 나중에는 ForwardAction 태그와 Forward 방식중에 Forward를 쓴다(Servlet에서) 쓰는 이유는 나중에 설명해주신다고 하심.
+
+
+			# 05 - 02IncludeAction #
+파일을 불러오는 index.jsp기준으로 파일을 탐색함. (image파일 같은거 경로적을 때 )
+
+
+
+01 Basic
+선언문 : <%! %>
+스크립틀릿 : <% %>
+표현식 : <%= %>
+서블릿에서 꺼내와서 브라우져에 표현할 내용들
+
+02
+request.getParameter("변수명");
+request.getparamValues("변수명");
+동일한 Value값들을 배열 형태로 받을 수 있었다.
+...
+
+03 지시자
+-page
+ - error
+ - import
+
+-include
+-tablib
+
+04 Forward / Redirect
+-Forward : request유지 o URL : 최초 URL 유지		/WEB-INF 경로 내의 위치로 전달 o
+-Redirect : request유지 x URL : 마지막 요청 URL
+
+05 ActionTag
+- forward 액션 태그 (Forward + Param전달 + 버퍼 초기화)
+- include 액션 태그 (include + Param전달)
+- useBean 액션 태그
+...
