@@ -1,0 +1,64 @@
+
+				# 07 - 01pageContext #
+
+핸드폰 사진 확인
+Apllication : 톰캣이 동작했을 때 값을 유지
+Session : 사용자가 사용했을 때 값을 유지
+Request :
+Page :
+
+				# 07 - 01Request #			
+Request라는 내장객체는 클라이언트에 대한 정보를 가지고 있음
+고객주소와 고객이름이 0.0.0.0.1인가 이런식으로 나오면 내가 접속해서 그럼.
+URL : 프로토콜, 서버주소, 포트 번호
+(07내장객체와 같은 문자가 들어가면 URL에서 인코딩을 함 특수기호로 %EB%82 막 이런거)
+URI : 
+
+크롬에서 F12로 개발자 도구를 열어서 네트워크에서 필터 지우고 전체에 두면 내 jsp가 나오는데 헤더에 보게 되면 User-Agent이런게 키임. 그래서 그 중에서 User-Agent를 자겨온다는 의미이고.
+
+			# 07내장객체 - 03Response -02Download2.jsp #
+
+response.setHeader("Content-Type","application/octet-stream;charset=utf-8");
+response.setHeader("Content-Disposition","attachment; filename=TEST.zip");
+==> 이 두내용이 진짜 중요함.(기본적인 설정)
+
+ServletOutputStream bout = response.getOutputStream();
+		
+//추가
+ZipOutputStream zout = new ZipOutputStream(bout);
+
+for (File file : filelist) {
+fin = new FileInputStream(file);
+
+ZipEntry zip = new ZipEntry(file.getName().toString());
+
+@ 파일의 '이름만' 가지고 와서 zip에서다가 담고 (TEST.txt)  zout이 bout의 내용을 담고 있으니깐
+
+zout.putNextEntry(zip);
+@ 여기서 zip 파일을 열어주고
+
+while (true) {
+int data = fin.read();
+if (data == -1)
+  break;
+zout.write((byte) data);
+}
+@ 여기서 zip 파일의 내용을 담아줌.
+
+zout.closeEntry();
+@ 여기서 zip 파일을 닫아줌.
+
+==> 이런 코드로 나중에 파일 업로드를 진행할 것임.
+
+
+
+## 세션(Session) ##
+클라이언트와 웹 서버 간의 상태를 지속적으로 유지하는 방법
+Ex_) 웹 쇼핑몰에서 장바구니나 주문 처리
+사용자 인증을 통해 특정 페이지를  사용할 수 있도록 권한 상태를 유지하는 것.
+
+
+강사님 깃 한번 더 참고!!
+
+
+
