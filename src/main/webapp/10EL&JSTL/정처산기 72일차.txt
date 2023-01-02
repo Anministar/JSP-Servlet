@@ -1,0 +1,32 @@
+			### 쿠키 ###
+세션 ==> 서버에 저장
+쿠키 ==> 클라이언트에 저장
+
+많은 Client가 각각의 세션을 가지는데 필요한 내장객체만을 가지는게 서버의 쾌적한 환경에 좋음.
+쿠키는 클라이언트가 가져야하는 정보 일부(중요하지 않은 정보)를 클라이언트에 저장하는것
+
+클라이언트의 정보를 지속적으로 담아내기 위해 세션과 쿠키가 있는것임.
+
+
+			### 09Cookie -01basic-CookCookie.jsp ###
+실행하지말고 프로젝트 우클릭 - run on server 해서 404 뜨는 곳에
+http://localhost:8070/JSP/09Cookie/01basic/CookCookie.jsp 이대로 쳐주고 enter치면 개발자도구에 뜸. 아니면 안됨.
+
+처음에는 네트워크에서 확인할 때 request headers 정보에 Cookie가 없는데
+다른곳에 찾아보면 setCookie에 세션의 정보를 담아온 걸 볼 수 있고 새로고침을 하게 되면 request headers 정보에 아까 세션의 정보를 가져온걸 볼 수 있음. Cookie : ~~~~~~~~~이런식으로 떠있음.
+
+
+
+++
+bcrypt maven - jar files 다운로드 - 다운받은 jar파일을 WEB-INF(lib폴더)에 옮겨주면 됨.
+
+
+
+EL은 외부평가에서 사용할 수 있음 
+JSTL은 외부평가에서 사용못함, 인터넷이 안돼서
+
+
+
+				### JSTL ###
+maven jstl 검색 - 최신버젼 들어가서 jar 파일 다운로드- web-INF의 lib 파일에 넣어줌.
+
